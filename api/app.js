@@ -32,7 +32,7 @@ app.route('/users')
     return usersManager
       .selectBy({ Name: name })
       .then(queryResult => {
-        res.json({
+        res.status(200).json({
           message: `Users list`,
           data: queryResult
         });
@@ -44,7 +44,7 @@ app.route('/users')
     usersManager
       .insert(name)
       .then(() => {
-        res.json({
+        res.status(200).json({
           message: `User ${name} successfully added!`
         });
       });
@@ -56,7 +56,7 @@ app.route('/users')
       .dropTable()
       .then(() => usersManager.createTable())
       .then(() => usersManager.insert(...names))
-      .then(() => res.json({
+      .then(() => res.status(200).json({
         message: `Collection of Users successfully replaced with ${names.join(', ')}!`
       }));
   })
@@ -80,7 +80,7 @@ app.route('/users')
           );
       })
       .then(message => {
-        res.json({
+        res.status(200).json({
           message: message
         });
       });
